@@ -1,11 +1,12 @@
 
 
-public class DoubleLinkedList<T> implements ListInterface<T> {
+public class DoubleLinkedList<T> implements ListInterface<T> 
+{
 	private DoubleLinkedNode first;
 	private DoubleLinkedNode last;
 	private int numElements;
 
-	public DoubleLinkedList() 
+	public DoubleLinkedList()
 	{
 		initializeDataFields();
 	}
@@ -18,12 +19,7 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 	@Override
 	public void add (T newEntry) 
 	{
-		DoubleLinkedNode node = new DoubleLinkedNode(newEntry);
-		node.previous = node.getPreviousNode();
-		
-		first = node;
-		last = node;
-		++numElements;
+		add(numElements, newEntry);
 	}
 
 	/** Adds a new entry at a specified position within this list.
@@ -38,20 +34,45 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 	 */
 	@Override
 	public void add (int newPosition, T newEntry) 
-	{
-			
-		DoubleLinkedNode node = new DoubleLinkedNode(newEntry);
-		
-		node.previous = node.getPreviousNode();
-		node.next = node.getNextNode();
-		
-		int iterator = 0;
-		
-		while(iterator != 0)
+	{	
+		if(newPosition >= 0 && newPosition <= numElements)
 		{
+			DoubleLinkedNode newNode = new DoubleLinkedNode(newEntry);
+
+			if(newPosition == numElements || newPosition == 0)
+			{
+				if(isEmpty())
+				{
+					first = newNode;
+					last = newNode;
+				}
+				else
+				{
+					DoubleLinkedNode prevNode = last;
+					newNode.setPreviousNode(last);
+					prevNode.setNextNode(newNode);
+					last = newNode;
+				}
+			}
+			else
+			{
+				DoubleLinkedNode prevNode = getNodeAt(newPosition - 1);
+				DoubleLinkedNode nextNode = prevNode.getNextNode();
+				
+				newNode.setPreviousNode(newNode);
+				newNode.setNextNode(nextNode);
+				
+				nextNode.setPreviousNode(newNode);
+				prevNode.setNextNode(newNode);
+			}
 			
 		}
+		else
+		{
+			throw new IndexOutOfBoundsException();
+		}
 		
+		++numElements;
 	}
 
 	/** Removes the entry at a given position from this list.
@@ -65,15 +86,23 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
                 		givenPosition < 0 or givenPosition > getLength() - 1.
 	 */
 	@Override
-	public T remove (int givenPosition) {
+	public T remove(int givenPosition)
+	{
+		DoubleLinkedNode removeNode = getNodeAt(givenPosition);
+		DoubleLinkedNode previousNode = removeNode.getPreviousNode();
+		DoubleLinkedNode nextNode = removeNode.getNextNode();
 
+		previousNode.setNextNode(nextNode);
+		nextNode.setPreviousNode(previousNode);
+
+		return removeNode.getData();
 	}
 
 
 	/** Removes all entries from this list. 
 	 */
 	@Override
-	public void clear () 
+	public void clear() 
 	{
 		initializeDataFields();
 	}
@@ -88,8 +117,9 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
              		givenPosition < 0 or givenPosition > getLength() -1. 
 	 */
 	@Override
-	public T replace (int givenPosition, T newEntry) {
-
+	public T replace(int givenPosition, T newEntry) 
+	{
+		return null;
 	}
 
 	/** Retrieves all entries that are in this list in the order in which
@@ -98,8 +128,19 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
                 If the list is empty, the returned array is empty. 
 	 */
 	@Override
-	public T[] toArray() {
+	public T[] toArray() 
+	{
+		T[] array = (T[]) new Object[numElements];
 
+		DoubleLinkedNode currentNode = first;
+
+		for(int i = 0; i < numElements; ++i)
+		{
+			array[i] = currentNode.getData();
+			currentNode = currentNode.next;
+		}
+
+		return array;
 	}
 
 	/** Sees whether this list contains a given entry.
@@ -107,8 +148,9 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
        		@return  True if the list contains anEntry, or false if not. 
 	 */
 	@Override
-	public boolean contains (T anEntry) {
-
+	public boolean contains(T anEntry) 
+	{
+		return false;
 	}
 
 	/** Gets the length of this list.
@@ -135,17 +177,20 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 	}
 
 	// Initializes the class's data fields to indicate an empty list.
-	private void initializeDataFields()  {
+	private void initializeDataFields()  
+	{
 		first = null;
 		last = null;
 		numElements = 0;
 	} 
 
-	public DoubleLinkedNode getFirst() {
+	public DoubleLinkedNode getFirst() 
+	{
 		return first;
 	}
 
-	public DoubleLinkedNode getLast() {
+	public DoubleLinkedNode getLast() 
+	{
 		return last;
 	}
 
@@ -158,7 +203,8 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 	 */
 	@Override
 	public T getEntry (int givenPosition) {
-		if ((givenPosition >= 0) && (givenPosition < numElements))	{
+		if ((givenPosition >= 0) && (givenPosition < numElements))	
+		{
 			assert !isEmpty();
 			return getNodeAt(givenPosition).getData();
 		}
@@ -185,17 +231,20 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 	} 
 
 
-	class DoubleLinkedNode{
+	class DoubleLinkedNode
+	{
 		private T data;  	 
 		private DoubleLinkedNode next;  	 // Link to next node
 		private DoubleLinkedNode previous;       // Link to previous node
 
-		private DoubleLinkedNode(T dataPortion){
+		private DoubleLinkedNode(T dataPortion)
+		{
 			data = dataPortion;
 			next = null;	
 			previous = null;	
 		}
-		private DoubleLinkedNode(T dataPortion, DoubleLinkedNode nextNode, DoubleLinkedNode previousNode){
+		private DoubleLinkedNode(T dataPortion, DoubleLinkedNode nextNode, DoubleLinkedNode previousNode)
+		{
 			data = dataPortion;
 			next = nextNode;	
 			previous = previousNode;
@@ -205,23 +254,28 @@ public class DoubleLinkedList<T> implements ListInterface<T> {
 			return data;
 		} 
 
-		private void setData(T newData){
+		private void setData(T newData)
+		{
 			data = newData;
 		} 
 
-		DoubleLinkedNode getNextNode(){
+		DoubleLinkedNode getNextNode()
+		{
 			return next;
 		} 
 
-		private void setNextNode(DoubleLinkedNode nextNode){
+		private void setNextNode(DoubleLinkedNode nextNode)
+		{
 			next = nextNode;
 		} 
 
-		DoubleLinkedNode getPreviousNode(){
+		DoubleLinkedNode getPreviousNode()
+		{
 			return previous;
 		}
 
-		private void setPreviousNode(DoubleLinkedNode previousNode){
+		private void setPreviousNode(DoubleLinkedNode previousNode)
+		{
 			previous = previousNode;
 		}
 	}

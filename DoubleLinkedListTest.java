@@ -68,161 +68,161 @@ public class DoubleLinkedListTest {
 	}
 
 	// ********* Third group of tests - more add method *********
-	// @Test
-	// // Test add to end of non-empty list
-	// public final void testAddT2() {
-	// 	list.add("Will");
-	// 	list.add("Barb");
-	// 	assertTrue(list.getLength()==2);
-	// }
+	@Test
+	// Test add to end of non-empty list
+	public final void testAddT2() {
+		list.add("Will");
+		list.add("Barb");
+		assertTrue(list.getLength()==2);
+	}
 
-	// @Test
-	// // Test add to end of non-empty list
-	// public final void testAddT3() {
-	// 	list.add("Will");
-	// 	list.add("Barb");
-	// 	assertNotNull(list.getLast());
-	// }
+	@Test
+	// Test add to end of non-empty list
+	public final void testAddT3() {
+		list.add("Will");
+		list.add("Barb");
+		assertNotNull(list.getLast());
+	}
 
-	// @Test
-	// // Test add to end of non-empty list
-	// public final void testAddT4() {
-	// 	list.add("Will");
-	// 	list.add("Barb");
-	// 	assertTrue(list.getLast().getData().equals("Barb"));
-	// }
+	@Test
+	// Test add to end of non-empty list
+	public final void testAddT4() {
+		list.add("Will");
+		list.add("Barb");
+		assertTrue(list.getLast().getData().equals("Barb"));
+	}
 
 	// ********* Fourth group of tests - add to position method *********
-	//	@Test
-	// // Add to first position of an empty list
-	// public final void testAddIntT1a() {
-	// 	list.add(0, "Barb");
-	// 	assertTrue(list.getFirst().getData().equals("Barb"));
-	// }
+	@Test
+	// Add to first position of an empty list
+	public final void testAddIntT1a() {
+		list.add(0, "Barb");
+		assertTrue(list.getFirst().getData().equals("Barb"));
+	}
 
-	// @Test
-	// // Add to first position of an empty list
-	// public final void testAddIntT1b() {
-	// 	list.add(0, "Barb");
-	// 	assertTrue(list.getFirst()==list.getNodeAt(0));
-	// }
+	@Test
+	// Add to first position of an empty list
+	public final void testAddIntT1b() {
+		list.add(0, "Barb");
+		assertTrue(list.getFirst()==list.getNodeAt(0));
+	}
 
-	// @Test
-	// // Add to first position of an empty list
-	// public final void testAddIntT1c() {
-	// 	list.add(0, "Barb");
-	// 	assertNotNull(list.getLast());
-	// }
+	@Test
+	// Add to first position of an empty list
+	public final void testAddIntT1c() {
+		list.add(0, "Barb");
+		assertNotNull(list.getLast());
+	}
 
-	// @Test
-	// // Add to first position of an non-empty list
-	// public final void testAddIntT2a() {
-	// 	populateList();
-	// 	list.add(0, "Barb");
-	// 	assertTrue(list.getNodeAt(1).getPreviousNode() != null);
-	// }
+	@Test
+	// Add to first position of an non-empty list
+	public final void testAddIntT2a() {
+		populateList();
+		list.add(0, "Barb");
+		assertTrue(list.getNodeAt(1).getPreviousNode() != null);
+	}
 
-	// @Test
-	// // Add to first position of an non-empty list
-	// public final void testAddIntT2b() {
-	// 	populateList();
-	// 	list.add(0, "Barb");
-	// 	assertTrue(list.getNodeAt(0) == list.getFirst());
-	// }
+	@Test
+	// Add to first position of an non-empty list
+	public final void testAddIntT2b() {
+		populateList();
+		list.add(0, "Barb");
+		assertTrue(list.getNodeAt(0) == list.getFirst());
+	}
 
-	// @Test
-	// // Add to third position of an non-empty list
-	// public final void testAddIntT3a() {
-	// 	populateList();
-	// 	list.add(2, "Barb");
-	// 	assertNotNull(list.getNodeAt(2).getPreviousNode());
-	// }
+	@Test
+	// Add to third position of an non-empty list
+	public final void testAddIntT3a() {
+		populateList();
+		list.add(2, "Barb");
+		assertNotNull(list.getNodeAt(2).getPreviousNode());
+	}
 
-	// @Test
-	// // Add to third position of an non-empty list
-	// public final void testAddIntT3b() {
-	// 	populateList();
-	// 	list.add(2, "Barb");
-	// 	assertEquals(list.getNodeAt(3).getPreviousNode(), list.getNodeAt(2));
+	@Test
+	// Add to third position of an non-empty list
+	public final void testAddIntT3b() {
+		populateList();
+		list.add(2, "Barb");
+		assertEquals(list.getNodeAt(3).getPreviousNode(), list.getNodeAt(2));
 
-	// }
+	}
 
-	// @Test
-	// // Add to last position of an non-empty list
-	// public final void testAddIntT4() {
-	// 	populateList();
-	// 	list.add(5, "Barb");
-	// 	assertNull(list.getLast().getNextNode());
-	// }
+	@Test
+	// Add to last position of an non-empty list
+	public final void testAddIntT4() {
+		populateList();
+		list.add(5, "Barb");
+		assertNull(list.getLast().getNextNode());
+	}
 
-	// @Test (expected=IndexOutOfBoundsException.class)
-	// // Add to illegal position of an empty list
-	// public final void testAddIntT5() {
-	// 	populateList();
-	// 	list.add(-1, "Barb");
-	// 	assertNull(list.getLast().getNextNode());
-	// }
+	@Test (expected=IndexOutOfBoundsException.class)
+	// Add to illegal position of an empty list
+	public final void testAddIntT5() {
+		populateList();
+		list.add(-1, "Barb");
+		assertNull(list.getLast().getNextNode());
+	}
 
-	// @Test (expected=IndexOutOfBoundsException.class)
-	// // Add to illegal position of an non-empty list
-	// public final void testAddIntT6() {
-	// 	populateList();
-	// 	list.add(11, "Barb");
-	// 	assertNull(list.getLast().getNextNode());
-	// }
+	@Test (expected=IndexOutOfBoundsException.class)
+	// Add to illegal position of an non-empty list
+	public final void testAddIntT6() {
+		populateList();
+		list.add(11, "Barb");
+		assertNull(list.getLast().getNextNode());
+	}
 
 
 	// ********* Fifth group of tests - remove method *********
-	// @Test
-	// // Remove from front
-	// public final void testRemove1a() {
-	// 	populateList();
-	// 	assertEquals("Will", list.remove(0));
-	// }
+	 @Test
+	 // Remove from front
+	 public final void testRemove1a() {
+	 	populateList();
+	 	assertEquals("Will", list.remove(0));
+	 }
 
-	// @Test
-	// // Remove from front
-	// public final void testRemove1b() {
-	// 	populateList();
-	// 	list.remove(0);
-	// 	assertNull(list.getFirst().getPreviousNode());
-	// }
+	 @Test
+	 // Remove from front
+	 public final void testRemove1b() {
+	 	populateList();
+	 	list.remove(0);
+	 	assertNull(list.getFirst().getPreviousNode());
+	 }
 
-	// @Test
-	// // Remove last node
-	// public final void testRemove2() {
-	// 	populateList();
-	// 	assertEquals("Eleven", list.remove(4));
-	// }
+	 @Test
+	 // Remove last node
+	 public final void testRemove2() {
+	 	populateList();
+	 	assertEquals("Eleven", list.remove(4));
+	 }
 
-	// @Test
-	// // Remove from the middle
-	// public final void testRemove3a() {
-	// 	populateList();
-	// 	assertEquals("Lucas", list.remove(2));
-	// }
+	 @Test
+	 // Remove from the middle
+	 public final void testRemove3a() {
+	 	populateList();
+	 	assertEquals("Lucas", list.remove(2));
+	 }
 
-	// @Test
-	// // Remove from the middle
-	// public final void testRemove3b() {
-	// 	populateList();
-	// 	list.remove(2);
-	// 	assertEquals("Dustin", ((list.getNodeAt(2)).getPreviousNode()).getData());
-	// }
+	 @Test
+	 // Remove from the middle
+	 public final void testRemove3b() {
+	 	populateList();
+	 	list.remove(2);
+	 	assertEquals("Dustin", ((list.getNodeAt(2)).getPreviousNode()).getData());
+	 }
 
-	// @Test (expected=IndexOutOfBoundsException.class)
-	// // Remove too small index
-	// public final void testRemove4() {
-	// 	populateList();
-	// 	assertEquals("Will", list.remove(-1));
-	// }
+	 @Test (expected=IndexOutOfBoundsException.class)
+	 // Remove too small index
+	 public final void testRemove4() {
+	 	populateList();
+	 	assertEquals("Will", list.remove(-1));
+	 }
 
-	// @Test (expected=IndexOutOfBoundsException.class)
-	// // Remove too large index
-	// public final void testRemove5() {
-	// 	populateList();
-	// 	assertEquals("Will", list.remove(9));
-	// }
+	 @Test (expected=IndexOutOfBoundsException.class)
+	 // Remove too large index
+	 public final void testRemove5() {
+	 	populateList();
+	 	assertEquals("Will", list.remove(9));
+	 }
 
 
 	// ********* Sixth group of tests - replace method *********
